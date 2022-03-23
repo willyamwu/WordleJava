@@ -1,16 +1,15 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
 
-import java.util.ArrayList; // Create an ArrayList object
-
-import java.util.ArrayList; // import the ArrayList class
 
 public class Wordle {
-
     public static void main(String[] args) {
-        instructions();
+        instructions(); 
+
         Words Word = new Words();
         String choosenOne = Word.chooseWord().toUpperCase();
-        // System.out.println(choosenOne);
+
         Scanner sn = new Scanner(System.in);
         boolean con = true;
         int count = 0;
@@ -55,6 +54,7 @@ public class Wordle {
         return s1;
     }
 
+
     public static boolean test(String input) {
         if (input.length() != 5) {
             System.out.println("The word was not 5 letters!");
@@ -94,6 +94,10 @@ public class Wordle {
         }
     }
 
+    public static void wordHelp(){
+
+    }
+
     public static int braces(String choosenOne, String character, int index){
         ArrayList<String> spliced = splice(choosenOne);
         for (int i = 0; i < 5; i++) {
@@ -115,12 +119,17 @@ public class Wordle {
         return spliced;
     }
 
+    // Displays the instructions to play the game.
     public static void instructions(){
-        System.out.println("Welcome to Wordle:");
-        System.out.println("Guess the five letter word.");
-        System.out.println("[A] means that the letter is not in the word.");
-        System.out.println("(A) means that the letter is in the word but not in the right spot.");
-        System.out.println("{A} means that the letter is in the right spot in the word.");
-        System.out.println("Enter in \"q\" to quit.");
+        File file = new File("Instructions.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+               System.out.println(line);           
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
     }
 }

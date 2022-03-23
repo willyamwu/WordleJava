@@ -1,0 +1,6 @@
+Welcome to Wordle!
+Guess the five letter word in six tries.
+[A] means that the letter is not in the word.
+(A) means that the letter is in the word but not in the right spot.
+{A} means that the letter is in the right spot in the word.
+Enter in q to quit.
