@@ -8,6 +8,9 @@ public class Wordle {
         instructions(); 
 
         Words Word = new Words();
+
+        Brain Brain = new Brain();
+
         String choosenOne = Word.chooseWord().toUpperCase();
 
         Scanner sn = new Scanner(System.in);
