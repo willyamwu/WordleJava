@@ -10,6 +10,7 @@ public class Brain {
     final String YELLOW_COLOR = "\u001B[33m";
     final String GREEN_COLOR = "\u001B[32m";
     final String BLACK_COLOR = "\u001B[0m";
+    final String RESET = "\u001B[0m";
 
     ArrayList<String> guesses = new ArrayList<String>();
     Dictionary<String, Integer> alphabet = new Hashtable<String,Integer>();
@@ -47,15 +48,15 @@ public class Brain {
                 }
                 else if (guesses.get(attempts).toUpperCase().equals(randomWord)){
                     isGo = false;
-                    System.out.println("isGograts you got it right!");
+                    System.out.println("Congrats you got it right!");
                 }
 
                 attempts++;
             } else {
                 System.out.println("That was wrong:");
             }
-
         }
+        sn.close();
     }
 
     public static String process(Scanner sn) {
@@ -83,13 +84,13 @@ public class Brain {
                 int place = braces(randomWord, character, j);
                 switch(place){
                     case 0:
-                        System.out.print(BLACK_COLOR + character + BLACK_COLOR);
+                        System.out.print("[" + BLACK_COLOR + character + RESET + "] ");
                         break;
                     case 1:
-                        System.out.print(YELLOW_COLOR + character + YELLOW_COLOR);
+                        System.out.print("[" + YELLOW_COLOR + character + RESET + "] ");
                         break;
                     case 2:
-                        System.out.print(GREEN_COLOR + character + GREEN_COLOR);
+                        System.out.print("[" + GREEN_COLOR + character + RESET + "] ");
                         break;
                     
                 }
