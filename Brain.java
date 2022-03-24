@@ -86,10 +86,10 @@ public class Brain {
                         System.out.print(BLACK_COLOR + character + BLACK_COLOR);
                         break;
                     case 1:
-                        System.out.print(GREEN_COLOR + character + GREEN_COLOR);
+                        System.out.print(YELLOW_COLOR + character + YELLOW_COLOR);
                         break;
                     case 2:
-                        System.out.print("(" + character + ") ");
+                        System.out.print(GREEN_COLOR + character + GREEN_COLOR);
                         break;
                     
                 }
@@ -112,10 +112,10 @@ public class Brain {
         ArrayList<String> spliced = splice(randomWord);
         for (int i = 0; i < 5; i++) {
             if (character.equals(spliced.get(i)) && index == i){
-                return 1;
+                return 2;
             }
             if (character.equals(spliced.get(i))){
-                return 2;
+                return 1;
             }
         }
         return 0;
