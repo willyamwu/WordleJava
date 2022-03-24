@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class Wordle {
     public static void main(String[] args) {
-        Frame myFrame = new Frame();
+        // Frame myFrame = new Frame();
 
 
 

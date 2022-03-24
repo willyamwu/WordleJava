@@ -3,8 +3,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.*;
 import java.io.*;
+import javax.xml.transform.Templates;
 
 public class Brain {
+
+    final String YELLOW_COLOR = "\u001B[33m";
+    final String GREEN_COLOR = "\u001B[32m";
+    final String BLACK_COLOR = "\u001B[0m";
 
     ArrayList<String> guesses = new ArrayList<String>();
     Dictionary<String, Integer> alphabet = new Hashtable<String,Integer>();
@@ -69,7 +74,7 @@ public class Brain {
         return Word.isWord(input);
     }
 
-    public static void draw(ArrayList<String> guesses, String randomWord){
+    public void draw(ArrayList<String> guesses, String randomWord){
         boolean isTrue = true;
         int count = 0;
         for (int l = 0; l < guesses.size(); l++) {
@@ -78,10 +83,10 @@ public class Brain {
                 int place = braces(randomWord, character, j);
                 switch(place){
                     case 0:
-                        System.out.print("[" + character + "] ");
+                        System.out.print(BLACK_COLOR + character + BLACK_COLOR);
                         break;
                     case 1:
-                        System.out.print("{" + character + "} ");
+                        System.out.print(GREEN_COLOR + character + GREEN_COLOR);
                         break;
                     case 2:
                         System.out.print("(" + character + ") ");
