@@ -10,9 +10,6 @@ public class Wordle {
         // Frame myFrame = new Frame();
 
 
-
-        // instructions(); 
-
         Words Word = new Words();
 
         Brain Brain = new Brain();
