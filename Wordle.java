@@ -1,10 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
-
+import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 public class Wordle {
     public static void main(String[] args) {
+        Frame myFrame = new Frame();
+
+
+
         instructions(); 
 
         Words Word = new Words();
