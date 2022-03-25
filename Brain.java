@@ -11,6 +11,7 @@ public class Brain {
     final String RED_COLOR = "\u001B[31m";
     final String RESET = "\u001B[0m";
 
+    Scanner sn = new Scanner(System.in);
     Keyboard keyboard = new Keyboard();
     Words Word = new Words();
 
@@ -18,7 +19,6 @@ public class Brain {
     }
 
     public void play() {
-        Scanner sn = new Scanner(System.in);
         ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
         keyboard.reset();
@@ -47,6 +47,7 @@ public class Brain {
                 if (guesses.get(attempts).toUpperCase().equals(randomWord)){
                     isGo = false;
                     System.out.println("Congrats you got it right in " + attempts + " tries!");
+                    break;
                 }
                 else if (attempts == 5) {
                     isGo = false;
