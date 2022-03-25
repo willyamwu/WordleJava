@@ -17,13 +17,12 @@ public class Brain {
     ArrayList<String> guesses = new ArrayList<String>();
     Keyboard keyboard = new Keyboard();
     Words Word = new Words();
-    Scanner sn = new Scanner(System.in);
 
     public Brain(){
-
     }
 
     public void play() {
+        Scanner sn = new Scanner(System.in);
         String randomWord = Word.chooseWord().toUpperCase();
         boolean isGo = true;
         int attempts = 0;
@@ -37,6 +36,12 @@ public class Brain {
                 System.out.println("You quit :(");
                 isGo = false;
                 break;
+            }
+            // To restart
+            else if (input.equals("r")) {
+                System.out.println("Restarting....");
+                // sn.close();
+                play();
             }
             else if (isValid(input)) {
                 guesses.add(input); 
