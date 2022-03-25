@@ -1,28 +1,29 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.*;
 import java.io.*;
+import java.security.Key;
+
 import javax.xml.transform.Templates;
 
 public class Brain {
 
+    // Color Constants
     final String YELLOW_COLOR = "\u001B[33m";
     final String GREEN_COLOR = "\u001B[32m";
-    final String BLACK_COLOR = "\u001B[0m";
+    final String RED_COLOR = "\u001B[31m";
     final String RESET = "\u001B[0m";
 
     ArrayList<String> guesses = new ArrayList<String>();
-    Dictionary<String, Integer> alphabet = new Hashtable<String,Integer>();
+    Keyboard keyboard = new Keyboard();
     Words Word = new Words();
     Scanner sn = new Scanner(System.in);
 
     public Brain(){
-        play();
+
     }
 
     public void play() {
-        populateDictionary();
         String randomWord = Word.chooseWord().toUpperCase();
         boolean isGo = true;
         int attempts = 0;
@@ -41,19 +42,18 @@ public class Brain {
                 guesses.add(input); 
                 draw(guesses, randomWord);
 
-                if (attempts == 5) {
+                if (guesses.get(attempts).toUpperCase().equals(randomWord)){
+                    isGo = false;
+                    System.out.println("Congrats you got it right!");
+                }
+                else if (attempts == 5) {
                     isGo = false;
                     System.out.print("You ran out of tries." +  "The word was " + randomWord + "\n");
                     break;
                 }
-                else if (guesses.get(attempts).toUpperCase().equals(randomWord)){
-                    isGo = false;
-                    System.out.println("Congrats you got it right!");
-                }
-
                 attempts++;
             } else {
-                System.out.println("That was wrong:");
+                System.out.println("Not in the dictionary.");
             }
         }
         sn.close();
@@ -61,8 +61,7 @@ public class Brain {
 
     public static String process(Scanner sn) {
         String s1 = sn.nextLine();
-        s1 = s1.trim();
-        s1 = s1.toLowerCase();
+        s1 = s1.trim().toLowerCase();
         return s1;
     }
 
@@ -80,41 +79,71 @@ public class Brain {
         int count = 0;
         for (int l = 0; l < guesses.size(); l++) {
             for (int j = 0; j < 5; j++){
-                String character = guesses.get(l).substring(j, j+1).toUpperCase();
-                int place = braces(randomWord, character, j);
+                String characterUpper = guesses.get(l).substring(j, j+1).toUpperCase();
+                String characterLower = guesses.get(l).substring(j, j+1).toLowerCase();
+                int place = braces(randomWord, characterUpper, j);
                 switch(place){
                     case 0:
-                        System.out.print("[" + BLACK_COLOR + character + RESET + "] ");
+                        keyboard.alphabetAndKey.replace(characterLower, 0);
+                        System.out.print("[" + characterUpper + "] ");
                         break;
                     case 1:
-                        System.out.print("[" + YELLOW_COLOR + character + RESET + "] ");
+                        keyboard.alphabetAndKey.replace(characterLower, 1);
+                        System.out.print("[" + YELLOW_COLOR + characterUpper + RESET + "] ");
                         break;
                     case 2:
-                        System.out.print("[" + GREEN_COLOR + character + RESET + "] ");
+                        keyboard.alphabetAndKey.replace(characterLower, 2);
+                        System.out.print("[" + GREEN_COLOR + characterUpper + RESET + "] ");
                         break;
                     
                 }
                 count++;
-
             }
             System.out.print("\n");
         }
 
+        // For displaying 5x6 grid.
         for (int i = guesses.size(); i<6; i++){
             System.out.println("[x] [x] [x] [x] [x]");
         }
+
+        drawAlphabet();
     }
 
-    public static void drawAlphabet(ArrayList<String> guesses){
-
+    public void drawAlphabet(){
+        System.out.println("\nKeyboard");
+        for (int i = 0; i < 26; i++){
+            switch(i){
+                case 10:
+                     System.out.print("");
+                case 19:
+                    System.out.print("\n");
+            }
+            switch(keyboard.alphabetAndKey.get(keyboard.alphabet[i].toLowerCase())){
+                case 0:
+                    System.out.print("[" + RED_COLOR + keyboard.alphabet[i] + RESET + "] ");
+                    break;
+                case 1:
+                    System.out.print("[" + YELLOW_COLOR + keyboard.alphabet[i] + RESET + "] ");
+                    break;
+                case 2:
+                    System.out.print("[" + GREEN_COLOR + keyboard.alphabet[i] + RESET + "] ");
+                    break;
+                case 3:
+                    System.out.print("[" + keyboard.alphabet[i] + "] ");
+                    break;
+            }
+            
+        }
+        System.out.print("\n");
     }
 
     public static int braces(String randomWord, String character, int index){
         ArrayList<String> spliced = splice(randomWord);
+        if (character.equals(spliced.get(index))){
+            return 2;
+        }
         for (int i = 0; i < 5; i++) {
-            if (character.equals(spliced.get(i)) && index == i){
-                return 2;
-            }
             if (character.equals(spliced.get(i))){
                 return 1;
             }
@@ -144,33 +173,5 @@ public class Brain {
 
     }
 
-    public void populateDictionary(){
-        alphabet.put("a", 0);
-        alphabet.put("b", 0);
-        alphabet.put("c", 0);
-        alphabet.put("d", 0);
-        alphabet.put("e", 0);
-        alphabet.put("f", 0);
-        alphabet.put("g", 0);
-        alphabet.put("h", 0);
-        alphabet.put("i", 0);
-        alphabet.put("j", 0);
-        alphabet.put("k", 0);
-        alphabet.put("l", 0);
-        alphabet.put("m", 0);
-        alphabet.put("n", 0);
-        alphabet.put("o", 0);
-        alphabet.put("p", 0);
-        alphabet.put("q", 0);
-        alphabet.put("r", 0);
-        alphabet.put("s", 0);
-        alphabet.put("t", 0);
-        alphabet.put("u", 0);
-        alphabet.put("v", 0);
-        alphabet.put("w", 0);
-        alphabet.put("x", 0);
-        alphabet.put("y", 0);
-        alphabet.put("z", 0);
-        alphabet.put("a", 0);
-    }
+
 }

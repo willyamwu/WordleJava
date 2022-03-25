@@ -7,12 +7,9 @@ import javax.swing.JFrame;
 
 public class Wordle {
     public static void main(String[] args) {
-        // Frame myFrame = new Frame();
-
-
-        Words Word = new Words();
-
         Brain Brain = new Brain();
+        Brain.instructions();
+        Brain.play();
 
     //     String choosenOne = Word.chooseWord().toUpperCase();
 

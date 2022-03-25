@@ -1,6 +1,6 @@
 Welcome to Wordle!
 Guess the five letter word in six tries.
-[A] means that the letter is not in the word.
-(A) means that the letter is in the word but not in the right spot.
-{A} means that the letter is in the right spot in the word.
+Red - the letter is not in the word.
+Yellow - the letter is in the word but not in the right spot.
+Green - the letter is in the right spot.
 Enter in q to quit.
