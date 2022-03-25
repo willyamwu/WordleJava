@@ -8,6 +8,10 @@ public class Keyboard {
     "Z", "X", "C", "V", "B", "N", "M"};
 
     public Keyboard() {
+        reset();
+    }
+
+    public void reset() {
         alphabetAndKey.put("a", 3);
         alphabetAndKey.put("b", 3);
         alphabetAndKey.put("c", 3);

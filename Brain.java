@@ -2,9 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
-import java.security.Key;
-
-import javax.xml.transform.Templates;
 
 public class Brain {
 
@@ -14,7 +11,6 @@ public class Brain {
     final String RED_COLOR = "\u001B[31m";
     final String RESET = "\u001B[0m";
 
-    ArrayList<String> guesses = new ArrayList<String>();
     Keyboard keyboard = new Keyboard();
     Words Word = new Words();
 
@@ -23,7 +19,9 @@ public class Brain {
 
     public void play() {
         Scanner sn = new Scanner(System.in);
+        ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
+        keyboard.reset();
         boolean isGo = true;
         int attempts = 0;
 
@@ -40,7 +38,6 @@ public class Brain {
             // To restart
             else if (input.equals("r")) {
                 System.out.println("Restarting....");
-                // sn.close();
                 play();
             }
             else if (isValid(input)) {
@@ -49,7 +46,7 @@ public class Brain {
 
                 if (guesses.get(attempts).toUpperCase().equals(randomWord)){
                     isGo = false;
-                    System.out.println("Congrats you got it right!");
+                    System.out.println("Congrats you got it right in " + attempts + " tries!");
                 }
                 else if (attempts == 5) {
                     isGo = false;
