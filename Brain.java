@@ -20,6 +20,7 @@ public class Brain {
     public void play() {
         ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
+        System.out.println(randomWord);
         keyboard.reset();
         boolean isGo = true;
         int attempts = 0;
@@ -28,16 +29,11 @@ public class Brain {
             System.out.println("Enter a five-letter word:");
             String input = process(sn);
 
-            // To quit
-            if (input.equals("q")) {
-                System.out.println("You quit :(");
+            // To exit
+            if (input.equals("e")) {
                 isGo = false;
+                restart(sn);
                 break;
-            }
-            // To restart
-            else if (input.equals("r")) {
-                System.out.println("Restarting....");
-                play();
             }
             else if (isValid(input)) {
                 guesses.add(input); 
@@ -45,12 +41,20 @@ public class Brain {
 
                 if (guesses.get(attempts).toUpperCase().equals(randomWord)){
                     isGo = false;
-                    System.out.println("Congrats you got it right in " + (attempts + 1) + " tries!");
-                    break;
+                    switch(attempts){
+                        case(0):
+                            System.out.println("You got it in " + (attempts + 1) + " attempt!");
+                            break;
+                        default:
+                            System.out.println("You got it in " + (attempts + 1) + " attempts!");
+                            break;
+                    }
+                    restart(sn);
                 }
                 else if (attempts == 5) {
                     isGo = false;
                     System.out.print("You ran out of tries." +  "The word was " + randomWord + "\n");
+                    restart(sn);
                     break;
                 }
                 attempts++;
@@ -156,6 +160,24 @@ public class Brain {
             spliced.add(randomWord.substring(i, i+1));
         }
         return spliced;
+    }
+
+    // Restarts or quits the game.
+    public void restart(Scanner sn) {
+        System.out.println("Do you want to restart? (Y/N)");
+        String response = sn.nextLine().trim().toUpperCase();
+        switch(response){
+            case "Y":
+                System.out.println("Restarting...");
+                play();
+                break;
+            case "N":
+                System.out.println("Quitting...");
+                break;
+            default:
+                System.out.println("Invalid input.");
+                restart(sn);
+        }
     }
 
     // Displays the instructions to play the game.

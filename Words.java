@@ -2,7 +2,7 @@ import java.util.Random;
 import java.io.*;
 
 public class Words {
-    File answerWords = new File("Answers.txt");
+    File answerWords = new File("Answer.txt");
     File guessWords = new File("5LetterWords.txt");
 
     public boolean isWord (String input){

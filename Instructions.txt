@@ -3,4 +3,4 @@ Guess the five letter word in six tries.
 Red - the letter is not in the word.
 Yellow - the letter is in the word but not in the right spot.
 Green - the letter is in the right spot.
-Enter in q to quit.
+Enter in "e" to exit or restart.
