@@ -10,6 +10,7 @@ public class Brain {
     final String RED_COLOR = "\u001B[31m";
     final String RESET = "\u001B[0m";
 
+    // Global Variables
     Scanner sn = new Scanner(System.in);
     Keyboard keyboard = new Keyboard();
     Words Word = new Words();
@@ -17,7 +18,6 @@ public class Brain {
     public void play() {
         ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
-        System.out.println(randomWord);
         keyboard.reset();
         boolean isGo = true;
         int attempts = 0;
@@ -27,7 +27,7 @@ public class Brain {
             String input = process(sn);
 
             // To exit
-            if (input.equals("e")) {
+            if (input.toLowerCase().equals("e") || input.toLowerCase().equals("exit")) {
                 isGo = false;
                 restart(sn);
                 break;
@@ -80,12 +80,14 @@ public class Brain {
 
     // Draws the words and remaining attempts in the terminal using boxes.
     public void draw(ArrayList<String> guesses, String randomWord){
+        // Iterating through the guesses.
         for (int i = 0; i < guesses.size(); i++) {
+            // Iterating through the word and finding the characters.
             for (int j = 0; j < 5; j++){
                 String characterUpper = guesses.get(i).substring(j, j+1).toUpperCase();
                 String characterLower = guesses.get(i).substring(j, j+1).toLowerCase();
-                int place = color(randomWord, characterUpper, j);
-                switch(place){
+                int colorKey = color(randomWord, characterUpper, j);
+                switch(colorKey){
                     case 0:
                         keyboard.alphabetAndKey.replace(characterLower, 0);
                         System.out.print("[" + characterUpper + "] ");
@@ -104,7 +106,7 @@ public class Brain {
             System.out.print("\n");
         }
 
-        // Displays 5x6 grid.
+        // Displays the 5x6 grid.
         for (int i = guesses.size(); i<6; i++){
             System.out.println("[x] [x] [x] [x] [x]");
         }
@@ -136,7 +138,6 @@ public class Brain {
                     System.out.print("[" + keyboard.alphabet[i] + "] ");
                     break;
             }
-            
         }
         System.out.print("\n");
     }
