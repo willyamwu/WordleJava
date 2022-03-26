@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.*;
 import java.io.*;
 
 public class Brain {
@@ -46,7 +45,7 @@ public class Brain {
 
                 if (guesses.get(attempts).toUpperCase().equals(randomWord)){
                     isGo = false;
-                    System.out.println("Congrats you got it right in " + attempts + " tries!");
+                    System.out.println("Congrats you got it right in " + (attempts + 1) + " tries!");
                     break;
                 }
                 else if (attempts == 5) {
@@ -78,8 +77,6 @@ public class Brain {
     }
 
     public void draw(ArrayList<String> guesses, String randomWord){
-        boolean isTrue = true;
-        int count = 0;
         for (int l = 0; l < guesses.size(); l++) {
             for (int j = 0; j < 5; j++){
                 String characterUpper = guesses.get(l).substring(j, j+1).toUpperCase();
@@ -100,12 +97,11 @@ public class Brain {
                         break;
                     
                 }
-                count++;
             }
             System.out.print("\n");
         }
 
-        // For displaying 5x6 grid.
+        // Displays 5x6 grid.
         for (int i = guesses.size(); i<6; i++){
             System.out.println("[x] [x] [x] [x] [x]");
         }
@@ -163,7 +159,7 @@ public class Brain {
     }
 
     // Displays the instructions to play the game.
-    public static void instructions(){
+    public void instructions(){
         File file = new File("Instructions.txt");
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;

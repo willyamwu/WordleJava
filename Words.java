@@ -2,10 +2,11 @@ import java.util.Random;
 import java.io.*;
 
 public class Words {
-    File words = new File("5LetterWords.txt");
+    File answerWords = new File("Answers.txt");
+    File guessWords = new File("5LetterWords.txt");
 
     public boolean isWord (String input){
-        try (BufferedReader br = new BufferedReader(new FileReader(words))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(guessWords))) {
             String line;
             while ((line = br.readLine()) != null) {
                if(input.equals(line)){
@@ -22,7 +23,7 @@ public class Words {
         Random rand = new Random();
         int num = rand.nextInt(5757);
         int i = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(words))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(answerWords))) {
             String line;
             while ((line = br.readLine()) != null) {
                 if(i == num){

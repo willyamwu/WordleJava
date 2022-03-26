@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class Keyboard {
     Hashtable<String, Integer> alphabetAndKey = new Hashtable<String,Integer>();
