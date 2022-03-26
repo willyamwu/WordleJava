@@ -14,9 +14,6 @@ public class Brain {
     Keyboard keyboard = new Keyboard();
     Words Word = new Words();
 
-    public Brain(){
-    }
-
     public void play() {
         ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
@@ -65,13 +62,14 @@ public class Brain {
         sn.close();
     }
 
+    // Uses Scanner to get input from user and clean it.
     public static String process(Scanner sn) {
         String s1 = sn.nextLine();
         s1 = s1.trim().toLowerCase();
         return s1;
     }
 
-
+    // Checks to see if the word is five letters and if it is a valid English word.
     public boolean isValid(String input) {
         if (input.length() != 5) {
             System.out.println("The word was not 5 letters!");
@@ -80,12 +78,13 @@ public class Brain {
         return Word.isWord(input);
     }
 
+    // Draws the words and remaining attempts in the terminal using boxes.
     public void draw(ArrayList<String> guesses, String randomWord){
-        for (int l = 0; l < guesses.size(); l++) {
+        for (int i = 0; i < guesses.size(); i++) {
             for (int j = 0; j < 5; j++){
-                String characterUpper = guesses.get(l).substring(j, j+1).toUpperCase();
-                String characterLower = guesses.get(l).substring(j, j+1).toLowerCase();
-                int place = braces(randomWord, characterUpper, j);
+                String characterUpper = guesses.get(i).substring(j, j+1).toUpperCase();
+                String characterLower = guesses.get(i).substring(j, j+1).toLowerCase();
+                int place = color(randomWord, characterUpper, j);
                 switch(place){
                     case 0:
                         keyboard.alphabetAndKey.replace(characterLower, 0);
@@ -110,10 +109,11 @@ public class Brain {
             System.out.println("[x] [x] [x] [x] [x]");
         }
 
-        drawAlphabet();
+        drawKeyboard();
     }
 
-    public void drawAlphabet(){
+    // Draws the keyboard in the terminal.
+    public void drawKeyboard(){
         System.out.println("\nKeyboard");
         for (int i = 0; i < 26; i++){
             switch(i){
@@ -141,25 +141,19 @@ public class Brain {
         System.out.print("\n");
     }
 
-    public static int braces(String randomWord, String character, int index){
-        ArrayList<String> spliced = splice(randomWord);
-        if (character.equals(spliced.get(index))){
+    // Decides which color to the character will be.
+    public static int color(String randomWord, String character, int index){
+        if (character.equals(randomWord.substring(index, index+1))){
             return 2;
         }
-        for (int i = 0; i < 5; i++) {
-            if (character.equals(spliced.get(i))){
-                return 1;
+        else {
+            for (int i = 0; i < 5; i++) {
+                if (character.equals(randomWord.substring(i, i+1))){
+                    return 1;
+                }
             }
         }
         return 0;
-    }
-
-    public static ArrayList<String> splice(String randomWord) {
-        ArrayList<String> spliced = new ArrayList<String>();
-        for(int i = 0; i < 5; i++){
-            spliced.add(randomWord.substring(i, i+1));
-        }
-        return spliced;
     }
 
     // Restarts or quits the game.
@@ -191,8 +185,5 @@ public class Brain {
         } catch (Exception e) {
             System.out.println("error");
         }
-
     }
-
-
 }
