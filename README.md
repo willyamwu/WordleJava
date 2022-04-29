@@ -2,7 +2,7 @@
 This is a Java version of the game wordle that I created in my CSII class!
 
 ## Instructions
-Guess the five letter word in six tries.
+The goal is to guess the five letter word in six tries.
 
 Red - the letter is not in the word.
 
