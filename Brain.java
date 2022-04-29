@@ -5,17 +5,17 @@ import java.io.*;
 public class Brain {
 
     // Color Constants
-    final String YELLOW_COLOR = "\u001B[33m";
-    final String GREEN_COLOR = "\u001B[32m";
-    final String RED_COLOR = "\u001B[31m";
-    final String RESET = "\u001B[0m";
+    private static final String YELLOW_COLOR = "\u001B[33m";
+    private static final String GREEN_COLOR = "\u001B[32m";
+    private static final String RED_COLOR = "\u001B[31m";
+    private static final String RESET = "\u001B[0m";
 
     // Global Variables
-    Scanner sn = new Scanner(System.in);
-    Keyboard keyboard = new Keyboard();
-    Words Word = new Words();
+    private static Scanner sn = new Scanner(System.in);
+    private static Keyboard keyboard = new Keyboard();
+    private static Words Word = new Words();
 
-    public void play() {
+    public static void play() {
         ArrayList<String> guesses = new ArrayList<String>();
         String randomWord = Word.chooseWord().toUpperCase();
         keyboard.reset();
@@ -70,7 +70,7 @@ public class Brain {
     }
 
     // Checks to see if the word is five letters and if it is a valid English word.
-    public boolean isValid(String input) {
+    public static boolean isValid(String input) {
         if (input.length() != 5) {
             System.out.println("The word was not 5 letters!");
             return false;
@@ -79,7 +79,7 @@ public class Brain {
     }
 
     // Draws the words and remaining attempts in the terminal using boxes.
-    public void draw(ArrayList<String> guesses, String randomWord){
+    public static void draw(ArrayList<String> guesses, String randomWord){
         // Iterating through the guesses.
         for (int i = 0; i < guesses.size(); i++) {
             // Iterating through the word and finding the characters.
@@ -115,7 +115,7 @@ public class Brain {
     }
 
     // Draws the keyboard in the terminal.
-    public void drawKeyboard(){
+    public static void drawKeyboard(){
         System.out.println("\nKeyboard");
         for (int i = 0; i < 26; i++){
             switch(i){
@@ -158,7 +158,7 @@ public class Brain {
     }
 
     // Restarts or quits the game.
-    public void restart(Scanner sn) {
+    public static void restart(Scanner sn) {
         System.out.println("Do you want to restart? (Y/N)");
         String response = sn.nextLine().trim().toUpperCase();
         switch(response){
@@ -176,7 +176,7 @@ public class Brain {
     }
 
     // Displays the instructions to play the game.
-    public void instructions(){
+    public static void instructions(){
         File file = new File("Instructions.txt");
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
